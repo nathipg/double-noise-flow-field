@@ -1,26 +1,20 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
+import { Canvas } from 'p5-react-renderer';
+
+import ParticleSystem from './classes/ParticleSystem';
+
 import './App.css';
 
-function App() {
-    const canvasRef = useRef(null);
-
-    useEffect(() => {
-        const ctx = canvasRef.current.getContext('2d');
-
-        ctx.clearRect(0, 0, window.innerWidth,window.innerHeight);
-        ctx.fillStyle = 'rgba(0, 0, 0, 1)';
-        ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
-
-        ctx.font = 'bolder 20px sans-serif';
-        ctx.fillStyle = 'white';
-        ctx.textAlign = 'center';
-        ctx.fillText('#100Days100Projects', 150, 75);
-    });
+const App = () => {
+    const canvasWidth = window.innerWidth;
+    const canvasHeight = window.innerHeight;
 
     return (
-        <div className="App">
-            <canvas ref={canvasRef} className="canvas" />
-        </div>
+        <Canvas size={[canvasWidth, canvasHeight]} background={50} noStroke noClear>
+            <colorMode args={p5 => [p5.HSB, 255]}>
+                <ParticleSystem num={300} />
+            </colorMode>
+        </Canvas>
     );
 }
 
